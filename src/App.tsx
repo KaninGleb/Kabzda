@@ -6,6 +6,7 @@ import {UnControlledRating} from './components/unControlledRating/UnControlledRa
 import {Rating, RatingValueType} from './components/rating/Rating.tsx';
 import {UncontrolledOnOff} from './components/uncontrolledOnOff/UncontrolledOnOff.tsx';
 import {OnOff} from './components/onOff/OnOff.tsx';
+import {Select} from './components/select/Select.tsx';
 
 
 function App() {
@@ -51,6 +52,17 @@ function App() {
                 onClick={(id) => alert(`User with ID ${id} should be happy`)}
             />
 
+            <Select
+                titleValue={'Users'}
+                value={'Users'}
+                items={[
+                    {title: 'Dimych', value: 1},
+                    {title: 'Valera', value: 2},
+                    {title: 'Viktor', value: 3},
+                    {title: 'Igor', value: 4},
+                ]}
+                onChange={() => {}}
+            />
         </div>
     )
 }
