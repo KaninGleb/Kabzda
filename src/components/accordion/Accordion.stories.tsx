@@ -1,44 +1,56 @@
-import {Meta, StoryObj} from '@storybook/react';
+import {StoryObj} from '@storybook/react';
 import {Accordion} from './Accordion';
 import {useState} from 'react';
 import {action} from '@storybook/addon-actions';
 
-const meta: Meta<typeof Accordion> = {
-    component: Accordion
-}
+// const meta: Meta<typeof Accordion> = {
+//     component: Accordion
+// }
+//
+// export default meta;
 
-export default meta;
+export default {
+    title: 'Accordion',
+    component: Accordion,
+}
 
 type Story = StoryObj<typeof Accordion>;
 
 export const FirstStory: Story = {
     args: {
-        title: 'Hello!',
-        collapsed: true,
-        users: ['1', '2', '3'],
+        titleValue: 'Hello!',
+        collapsed: false,
+        items: [{title: 'Dimych', value: 1}, {title: 'Valera', value: 2}, {title: 'Viktor', value: 3}],
     },
 }
 
-const onChangeHandler = action('Accordion mode change event fired')
+const onChangeHandler = action('Accordion mode change event fired');
+const onClickCallback = action('Some item was clicked');
 
 export const CollapsedAccordion = () => {
     return (
         <Accordion
-            title={'Collapsed Accordion'}
+            titleValue={'Collapsed Accordion'}
             collapsed={true}
             onChange={onChangeHandler}
-            users={['1', '2', '3']}
+            items={[]}
+            onClick={onClickCallback}
         />
     )
 }
 
-export const OpenedAccordion = () => {
+export const UnCollapsedAccordion = () => {
     return (
         <Accordion
-            title={'Opened Accordion'}
+            titleValue={'Opened Accordion'}
             collapsed={false}
             onChange={() => {}}
-            users={['1', '2', '3']}
+            items={[
+                {title: 'Dimych', value: 1},
+                {title: 'Valera', value: 2},
+                {title: 'Viktor', value: 3}
+            ]}
+            onClick={onClickCallback}
         />
     )
 }
@@ -48,12 +60,15 @@ export const AccordionDemo = () => {
 
     return (
         <Accordion
-            title={'Accordion'}
+            titleValue={'Users'}
             collapsed={collapsed}
-            onChange={() => {
-                setCollapsed(!collapsed)
-            }}
-            users={['1', '2', '3']}
+            onChange={() => setCollapsed(!collapsed)}
+            items={[
+                {title: 'Dimych', value: 1},
+                {title: 'Valera', value: 2},
+                {title: 'Viktor', value: 3}
+            ]}
+            onClick={(id) => alert(`User with ID ${id} should be happy`)}
         />
     )
 }
