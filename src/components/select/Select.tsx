@@ -7,13 +7,12 @@ type ItemType = {
 
 type SelectPropsType = {
     titleValue: string
-    value: any
     onChange: (value: any) => void
     items: ItemType[]
 }
 
 export const Select = (props: SelectPropsType) => {
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState(props.titleValue);
     const [disabled, setDisabled] = useState<boolean>(false);
 
     // const headerValue = props.items.find(i => i.value === props.value);
@@ -51,7 +50,7 @@ export const Select = (props: SelectPropsType) => {
                     </option>
                 ))}
             </select>
-            <span>Selected: {value}</span>
+            <span>Selected: {value === props.titleValue ? '' : value}</span>
         </div>
     )
 }

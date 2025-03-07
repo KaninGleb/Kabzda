@@ -54,7 +54,6 @@ function App() {
 
             <Select
                 titleValue={'Users'}
-                value={'Users'}
                 items={[
                     {title: 'Dimych', value: 1},
                     {title: 'Valera', value: 2},
