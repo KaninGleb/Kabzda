@@ -16,14 +16,18 @@ function App() {
     return (
         <div className="App">
             <Accordion
-                title={'Menu-1'}
+                titleValue={'Menu-1'}
                 collapsed={true}
-                users={['1', '2', '3']}
+                items={[{title: 'Dimych', value: 1}, {title: 'Valera', value: 2}, {title: 'Viktor', value: 3}]}
+                onChange={()=>{}}
+                onClick={()=>{}}
             />
             <Accordion
-                title={'Users'}
+                titleValue={'Users'}
                 collapsed={false}
-                users={['1', '2', '3']}
+                items={[{title: 'Dimych', value: 1}, {title: 'Valera', value: 2}, {title: 'Viktor', value: 3}]}
+                onChange={()=>{}}
+                onClick={()=>{}}
             />
 
             <UncontrolledOnOff onChange={setSwitchOn}/> {switchOn.toString()}
@@ -35,16 +39,18 @@ function App() {
                 users={['1', '2', '3']}
             />
 
-            <UnControlledRating/>
+            <UnControlledRating onChange={()=>{}}/>
 
             <Rating value={ratingValue} onClick={setRatingValue}/>
             
             <Accordion
-                title={'Menu-3'}
+                titleValue={'Menu-3'}
                 collapsed={accordionCollapsed}
-                users={['1', '2', '3']}
+                items={[{title: 'Dimych', value: 1}, {title: 'Valera', value: 2}, {title: 'Viktor', value: 3}]}
                 onChange={() => setAccordionCollapsed(!accordionCollapsed)}
+                onClick={(id) => alert(`User with ID ${id} should be happy`)}
             />
+
         </div>
     )
 }

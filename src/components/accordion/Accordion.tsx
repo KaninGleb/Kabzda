@@ -1,38 +1,50 @@
-type AccordionPropsType = {
+
+type ItemType = {
     title: string
-    collapsed: boolean
-    users?: Array<string>
-    onChange?: () => void
+    value: any
 }
 
-export const Accordion = ({title, collapsed, users, onChange}: AccordionPropsType) => {
+type AccordionPropsType = {
+    titleValue: string
+    collapsed: boolean
+    onChange: () => void
+    items: ItemType[]
+    onClick: (value: any) => void
+}
+
+export const Accordion = ({titleValue, collapsed, items, onChange, onClick}: AccordionPropsType) => {
     return (
         <div>
             <AccordionTitle
-                title={title}
+                title={titleValue}
                 onChange={onChange}
             />
-            { !collapsed && <AccordionBody users={users}/>}
+            { !collapsed && <AccordionBody items={items} onClick={onClick}/>}
         </div>
     )
 }
 
 type AccordionTitlePropsType = {
     title: string
-    onChange?: () => void,
+    onChange: () => void
 }
 
 const AccordionTitle = ({title, onChange}: AccordionTitlePropsType) => {
-        return (
-        <h3 onClick={onChange}>{title}</h3>
+    return (
+        <h3 onClick={onChange} style={{cursor: 'pointer'}}>{title}</h3>
     )
 }
 
-const AccordionBody = ({users}: { users?: Array<string> }) => {
+type AccordionBodyType = {
+    items: ItemType[]
+    onClick: (value: any) => void
+}
+
+const AccordionBody = ({items, onClick}: AccordionBodyType) => {
     return (
         <ul>
-            {users && users.map((user, index) => (
-                <li key={index}>{user}</li>
+            {items && items.map((user,  i) => (
+                <li key={i} onClick={() => {onClick(user.value)}} style={{cursor: 'pointer'}}>{user.title}</li>
             ))}
         </ul>
     )
