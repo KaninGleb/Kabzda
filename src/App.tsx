@@ -12,7 +12,8 @@ import {Select} from './components/select/Select.tsx';
 function App() {
     const [ratingValue, setRatingValue] = useState<RatingValueType>(0);
     const [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(false);
-    const [switchOn, setSwitchOn] = useState<boolean>(false)
+    const [switchOn, setSwitchOn] = useState<boolean>(false);
+    const [selectValue, setSelectValue] = useState('');
 
     return (
         <div className="App">
@@ -54,13 +55,14 @@ function App() {
 
             <Select
                 titleValue={'Users'}
+                value={selectValue}
                 items={[
-                    {title: 'Dimych', value: 1},
-                    {title: 'Valera', value: 2},
-                    {title: 'Viktor', value: 3},
-                    {title: 'Igor', value: 4},
+                    {value: '1', title: 'Minsk'},
+                    {value: '2', title: 'Moscow'},
+                    {value: '3', title: 'Kiev'},
+                    {value: '4', title: 'Beijing'},
                 ]}
-                onChange={() => {}}
+                onChange={setSelectValue}
             />
         </div>
     )
