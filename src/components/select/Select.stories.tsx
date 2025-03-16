@@ -23,7 +23,7 @@ export const WithValue = () => {
 }
 
 export const WithoutValue = () => {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     return (
         <Select
