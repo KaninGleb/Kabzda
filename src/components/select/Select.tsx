@@ -1,56 +1,79 @@
-import {ChangeEvent, CSSProperties, useState} from 'react';
+import styles from './Select.module.css'
+import {useState, KeyboardEvent, useEffect} from 'react';
 
 type ItemType = {
     title: string
-    value: any
+    value: string
 }
 
 type SelectPropsType = {
+    value?: string
     titleValue: string
-    onChange: (value: any) => void
+    onChange: (value: string) => void
     items: ItemType[]
 }
 
 export const Select = (props: SelectPropsType) => {
-    const [value, setValue] = useState(props.titleValue);
-    const [disabled, setDisabled] = useState<boolean>(false);
+    const [active, setActive] = useState<boolean>(false);
+    const [hoveredElementValue, setHoveredElementValue] = useState(props.value);
 
-    // const headerValue = props.items.find(i => i.value === props.value);
+    const selectedItem = props.items.find(i => i.value === props.value);
+    const hoveredItem = props.items.find(i => i.value === hoveredElementValue);
 
-    const selectOnChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        setValue(e.currentTarget.value);
+    useEffect( () => {
+        setHoveredElementValue(props.value);
+    }, [props.value])
+
+    const toggleItems = () => setActive(!active);
+    const onItemClick = (value: string) => {
+        props.onChange(value);
+        toggleItems();
     }
 
-    const divFlexCss: CSSProperties = {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-        maxWidth: '120px'
-    }
+    const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            for (let i = 0; i < props.items.length; i++) {
+                if (props.items[i].value === hoveredElementValue) {
+                    const pretenderElement = e.key === 'ArrowDown'
+                        ? props.items[i + 1]
+                        : props.items[i - 1];
 
-    const selectCss: CSSProperties = {
-        padding: '10px',
-        border: 'none',
-        backgroundColor: 'lightGrey',
-        cursor: 'pointer',
-        borderRadius: '5px',
+                    if (pretenderElement) {
+                        props.onChange(pretenderElement.value);
+                        return;
+                    }
+                }
+            }
+            if (!selectedItem) {
+                props.onChange(props.items[0].value);
+            }
+        }
+
+        if (e.key === 'Enter' || e.key === 'Escape') {
+            setActive(false);
+        }
     }
 
     return (
-        <div style={divFlexCss}>
-            <select
-                style={selectCss}
-                onChange={selectOnChangeHandler}
-                onClick={() => setDisabled(true)}
-            >
-                <option disabled={disabled}>{props.titleValue}</option>
-                {props.items.map(i => (
-                    <option key={i.value}>
-                        {i.title}
-                    </option>
-                ))}
-            </select>
-            <span>Selected: {value === props.titleValue ? '' : value}</span>
+        <div className={styles.select} onKeyDown={onKeyDown} tabIndex={0} onBlur={ () => setActive(false) }>
+                <span
+                    className={styles.main}
+                    onClick={toggleItems}>
+                    {selectedItem && selectedItem.title}
+                </span>
+            {active &&
+                <div className={styles.items}>
+                    {props.items.map(i => (
+                        <div
+                            onMouseEnter={() => setHoveredElementValue(i.value)}
+                            className={styles.item + ' ' + (hoveredItem === i ? styles.selected : '')}
+                            key={i.value}
+                            onClick={() => onItemClick(i.value)}
+                        >{i.title}
+                        </div>
+                    ))}
+                </div>
+            }
         </div>
     )
 }
