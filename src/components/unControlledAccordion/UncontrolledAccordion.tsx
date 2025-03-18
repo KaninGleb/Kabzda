@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import {reducer, TOGGLE_CONSTANT} from './Reducer.tsx';
+import {reducer, TOGGLE_CONSTANT} from './reducer.tsx';
 
 type AccordionPropsType = {
     title: string
