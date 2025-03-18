@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react';
-import {reducer, TOGGLE_CONSTANT} from './reducer.tsx';
+import {reducer, TOGGLE_COLLAPSED} from './reducer.tsx';
 
 type AccordionPropsType = {
     title: string
@@ -8,12 +8,12 @@ type AccordionPropsType = {
 
 
 export const UncontrolledAccordion = ({title, users}: AccordionPropsType) => {
-    const [collapsed, dispatch] = useReducer(reducer, false);
+    const [state, dispatch] = useReducer(reducer, { collapsed: false });
 
     return (
         <div>
-            <AccordionTitle onClick={() => dispatch({ type: TOGGLE_CONSTANT }) } title={title}/>
-            {collapsed && <AccordionBody users={users}/>}
+            <AccordionTitle onClick={() => dispatch({ type: TOGGLE_COLLAPSED }) } title={title}/>
+            {state.collapsed && <AccordionBody users={users}/>}
         </div>
     )
 }
