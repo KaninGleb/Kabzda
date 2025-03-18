@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
+import {reducer, TOGGLE_CONSTANT} from './Reducer.tsx';
 
 type AccordionPropsType = {
     title: string
     users?: Array<string>
 }
 
-export const UncontrolledAccordion = ({title, users}: AccordionPropsType) => {
-    const [collapsed, setCollapsed] = useState(false);
 
-    const toggleHandler = () => setCollapsed(!collapsed);
+export const UncontrolledAccordion = ({title, users}: AccordionPropsType) => {
+    const [collapsed, dispatch] = useReducer(reducer, false);
 
     return (
         <div>
-            <AccordionTitle onClick={toggleHandler} title={title}/>
+            <AccordionTitle onClick={() => dispatch({ type: TOGGLE_CONSTANT }) } title={title}/>
             {collapsed && <AccordionBody users={users}/>}
         </div>
     )
