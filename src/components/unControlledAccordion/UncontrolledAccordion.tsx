@@ -18,7 +18,7 @@ export const UncontrolledAccordion = ({title, users}: AccordionPropsType) => {
     )
 }
 
-const AccordionTitle = ({title, onClick}: {
+const AccordionTitle = React.memo(({title, onClick}: {
     title: string
     onClick: () => void
 }) => {
@@ -31,9 +31,9 @@ const AccordionTitle = ({title, onClick}: {
     return (
         <h3 onClick={onClick} style={titleStyle}>{title}</h3>
     )
-}
+})
 
-const AccordionBody = ({users}: { users?: Array<string> }) => {
+const AccordionBody = React.memo(({users}: { users?: Array<string> }) => {
     return (
         <ul>
             {users && users.map((user, index) => (
@@ -41,4 +41,4 @@ const AccordionBody = ({users}: { users?: Array<string> }) => {
             ))}
         </ul>
     )
-}
+})
