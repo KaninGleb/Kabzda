@@ -25,7 +25,7 @@ type StarPropsType = {
     onClick: (value: RatingValueType) => void
 }
 
-const Star = (props: StarPropsType) => {
+const Star = React.memo((props: StarPropsType) => {
     const starStyle: React.CSSProperties = {
         cursor: 'pointer',
         userSelect: 'none',
@@ -36,4 +36,4 @@ const Star = (props: StarPropsType) => {
             {props.selected ? '🟢' : '🔴'}
         </span>
     )
-}
+})
