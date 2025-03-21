@@ -28,7 +28,8 @@ type StarPropsType = {
     setRating: () => void
 }
 
-const Star = (props: StarPropsType) => {
+const Star = React.memo((props: StarPropsType) => {
+    console.log('Star')
     const starStyle: React.CSSProperties = {
         cursor: 'pointer',
         userSelect: 'none',
@@ -39,5 +40,4 @@ const Star = (props: StarPropsType) => {
             {props.selected ? '🟢' : '🔴'}
         </span>
     )
-}
-
+})
