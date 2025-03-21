@@ -1,3 +1,4 @@
+import React from 'react';
 
 type ItemType = {
     title: string
@@ -29,18 +30,21 @@ type AccordionTitlePropsType = {
     onChange: () => void
 }
 
-const AccordionTitle = ({title, onChange}: AccordionTitlePropsType) => {
+const AccordionTitle = React.memo(({title, onChange}: AccordionTitlePropsType) => {
+    console.log('AccordionTitle rendered');
     return (
         <h3 onClick={onChange} style={{cursor: 'pointer'}}>{title}</h3>
     )
-}
+})
 
 type AccordionBodyType = {
     items: ItemType[]
     onClick: (value: any) => void
 }
 
-const AccordionBody = ({items, onClick}: AccordionBodyType) => {
+const AccordionBody = React.memo(({items, onClick}: AccordionBodyType) => {
+    console.log('AccordionBody rendered');
+
     return (
         <ul>
             {items && items.map((user,  i) => (
@@ -48,4 +52,4 @@ const AccordionBody = ({items, onClick}: AccordionBodyType) => {
             ))}
         </ul>
     )
-}
+})
