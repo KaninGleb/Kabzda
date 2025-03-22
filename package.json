@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://KaninGleb.github.io/Kabzda",
+  "homepage": "https://kaningleb.github.io/Kabzda",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -12,8 +12,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest",
-    "deploy": "gh-pages -d build",
-    "predeploy": "pnpm run build"
+    "predeploy": "pnpm run build-storybook",
+    "deploy-storybook": "pnpm gh-pages -d storybook-static"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.34",
