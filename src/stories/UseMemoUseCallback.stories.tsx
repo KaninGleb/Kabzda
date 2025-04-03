@@ -81,13 +81,13 @@ export const LikeUseCallback = () => {
     const [counter, setCounter] = useState<number>(0);
     const [books, setBooks] = useState(['React', 'JS', 'CSS', 'HTML']);
 
-    const memoizedAddBook = useMemo(() => {
-        return () => {
-            console.log(books)
-            const newBooks = [...books, 'Angular ' + new Date().toTimeString().slice(0, 8)];
-            setBooks(newBooks);
-        }
-    }, [books]);
+    // const memoizedAddBook = useMemo(() => {
+    //     return () => {
+    //         console.log(books)
+    //         const newBooks = [...books, 'Angular ' + new Date().toTimeString().slice(0, 8)];
+    //         setBooks(newBooks);
+    //     }
+    // }, [books]);
 
     const memoizedAddBook2 = useCallback(() => {
         console.log(books)
