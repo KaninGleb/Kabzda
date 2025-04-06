@@ -63,3 +63,24 @@ export const SetTimeoutExample = () => {
     </>
   )
 }
+
+export const UseEffectMyClocks = () => {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+
+    const intervalId = setInterval(() => {
+      const getTime = new Date().toTimeString().slice(0, 8);
+      console.log(getTime);
+      setTime(getTime);
+    }, 1000)
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <>
+      Time: {time}
+    </>
+  )
+}
