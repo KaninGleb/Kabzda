@@ -64,6 +64,31 @@ export const SetTimeoutExample = () => {
   )
 }
 
+export const UseEffectClocks = () => {
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+
+    const intervalId = setInterval(() => {
+      const hours = new Date().getHours();
+      const minutes = new Date().getMinutes();
+      const seconds = new Date().getSeconds();
+
+      console.log( `${hours}:${minutes}:${seconds}` );
+
+      setTime( [hours, minutes, seconds].join(':') );
+    }, 1000)
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <>
+      Time: {time}
+    </>
+  )
+}
+
 export const UseEffectMyClocks = () => {
   const [time, setTime] = useState('');
 
