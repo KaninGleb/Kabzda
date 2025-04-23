@@ -3,7 +3,7 @@ import {UncontrolledMyClock} from './UncontrolledMyClock.tsx';
 
 
 export default {
-  title: 'Clock',
+  title: 'MyClock',
   component: MyClock
 }
 
