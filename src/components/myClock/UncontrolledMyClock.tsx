@@ -22,9 +22,13 @@ export const UncontrolledMyClock = () => {
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
 
-  const hoursDeg = (hours / 12) * 360 + (minutes / 60) * 30 + 90;
-  const minutesDeg = (minutes / 60) * 360 + (seconds / 60) * 6 + 90;
-  const secondsDeg = (seconds / 60) * 360 + 90;
+  // const hoursDeg = (hours / 12) * 360 + (minutes / 60) * 30 + 90;
+  // const minutesDeg = (minutes / 60) * 360 + (seconds / 60) * 6 + 90;
+  // const secondsDeg = (seconds / 60) * 360 + 90;
+
+  const hoursDeg = (hours / 12) * 360;
+  const minutesDeg = (minutes / 60) * 360;
+  const secondsDeg = (seconds / 60) * 360;
 
   return (
     <>
