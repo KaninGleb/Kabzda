@@ -42,7 +42,7 @@ export const SimpleExample = () => {
   )
 }
 
-export const SetTimeoutExample = () => {
+export const SetIntervalMistakeExample = () => {
   const [fake] = useState(1);
   const [counter, setCounter] = useState(1);
 
@@ -60,6 +60,27 @@ export const SetTimeoutExample = () => {
   return (
     <>
       Hello, counter: {counter} - fake: {fake}
+    </>
+  )
+}
+
+export const SetIntervalExample = () => {
+  const [counter, setCounter] = useState(1);
+
+  console.log('SetTimeoutExample');
+
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      console.log('tick: ' + counter);
+      setCounter((state) => state + 1);
+    }, 1000)
+
+    return () => clearInterval(intervalID);
+  }, []);
+
+  return (
+    <>
+      Hello, counter: {counter}
     </>
   )
 }
@@ -157,3 +178,4 @@ export const KeysTrackerExample = () => {
     </>
   )
 }
+
