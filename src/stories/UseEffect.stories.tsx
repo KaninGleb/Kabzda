@@ -179,3 +179,22 @@ export const KeysTrackerExample = () => {
   )
 }
 
+export const SetTimeoutExample = () => {
+  const [text, setText] = useState('');
+
+  console.log('Component rendered with: ' + text);
+
+  useEffect(() => {
+    const timeoutID = setTimeout(() => {
+      setText('3 seconds passed');
+    }, 3000)
+
+    return () => clearTimeout(timeoutID)
+  }, [text]);
+
+  return (
+    <>
+      Text: {text}
+    </>
+  )
+}
