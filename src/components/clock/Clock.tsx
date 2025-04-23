@@ -1,9 +1,13 @@
 import {useEffect, useState} from 'react';
+import {AnalogClockView} from './AnalogClockView.tsx';
+import {DigitalClockView} from './DigitalClockView.tsx';
 
 
-const get2digitsString = (num: number) => num < 10 ? '0' + num : num;
+type MyClockType = {
+  mode?: 'analog' | 'digital'
+}
 
-export const Clock = () => {
+export const Clock = ({ mode }: MyClockType) => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -14,13 +18,24 @@ export const Clock = () => {
     return () => clearInterval(intervalID);
   }, [])
 
+  let view;
+
+  switch (mode) {
+    case 'analog':
+      view = <AnalogClockView date={date} />;
+      break;
+    case 'digital':
+    default:
+      view = <DigitalClockView date={date} />
+  }
+
   return (
     <div>
-      <span>{ get2digitsString(date.getHours()) }</span>
-      :
-      <span>{ get2digitsString(date.getMinutes()) }</span>
-      :
-      <span>{ get2digitsString(date.getSeconds()) }</span>
+      {view}
     </div>
   )
+}
+
+export type ClockViewPropsType = {
+  date: Date
 }
